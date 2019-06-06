@@ -1,0 +1,56 @@
+#include "proj06_functions.h"
+
+
+#include <fstream>
+using std::ifstream;
+
+#include<stdexcept>
+using std::runtime_error;
+
+
+using matrix_row = vector<int>;
+using matrix = vector<matrix_row>; 
+
+#include<iostream>
+using std::cout;using std::cin; using std::endl;
+
+
+vector<vector<int>> read_file(const string &fname){
+    matrix_row row;
+    matrix result;
+
+    string line;
+
+    ifstream infile(fname);
+
+    if (infile){
+        while (getline(infile,line))
+        {
+            for (auto chac : line){
+            chac = static_cast<int>(chac);
+
+            row.push_back(chac);
+            }
+            result.push_back(row);
+            row.clear();
+        }
+        return result;
+
+    }
+
+    else{
+        throw runtime_error("no file opened");
+    }
+
+
+
+
+}
+vector<int> get_row(const vector<vector<int>> &v, int row);
+vector<int> get_column(const vector<vector<int>> &v, int col);
+string check_column_parity(const vector<vector<int>> &v, int col);
+string check_row_parity(const vector<vector<int>> &v, int r);
+int col_to_int(const vector<vector<int>> &v, size_t col);
+string get_time(const vector<vector<int>> &v);
+string get_date(const vector<vector<int>> &v);
+string get_serial(const vector<vector<int>> &v);
